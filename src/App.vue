@@ -9,14 +9,22 @@
       <v-btn
         flat
         href="/login"
-        target="_blank"
+        target=""
       >
-        <span class="mr-2">Login</span>        
+        <span class="mr-2">Filme</span>        
       </v-btn> 
       <v-btn
         flat
+        href="/cadastro/filme"
+        target=""
+      >
+        <span class="mr-2">Cadastro Filme</span>        
+      </v-btn> 
+      
+      <v-btn
+        flat
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        target=""
       >
         <span class="mr-2">Latest Release</span>
       </v-btn>
@@ -31,11 +39,14 @@
 <script>
 import HelloWorld from './components/HelloWorld'
 import Login from './components/Login'
+import Filme from './components/cadastro/CadastroFilme'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Filme
   },
   data () {
     return {

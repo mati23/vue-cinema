@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Login.vue'
+import Filme from './components/cadastro/CadastroFilme.vue'
 
 Vue.use(Router)
 
@@ -13,6 +14,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/cadastro/filme',
+      name: 'cadastro_filme',
+      component: Filme
     },
     {
       path: '/',
