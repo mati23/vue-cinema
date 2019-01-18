@@ -18,6 +18,7 @@
     <v-select
       v-model="genero"
       :items="generoItems"
+      :item-text="'genero'"
       :rules="[v => !!v || 'Item is required']"
       label="Gênero"
       required
@@ -76,7 +77,10 @@ export default {
                 "collection": "filmes",
                 "titulo": this.tituloFilme,
                 "genero": this.genero,
-                "classificacao": this.classificacao                             
+                "classificacao": this.classificacao,
+                "created_at": new Date(),
+                "updated_at": "",
+                "deleted_at": ""                             
                 }    
             ).catch(error => console.log(error))
         }
@@ -92,9 +96,12 @@ export default {
             },fields: ["_id", "genero"]
             }
             ).then(resultado => {                
-                for(var i=0;i<resultado.data.docs.length;i++){
-                    this.generoItems.push(resultado.data.docs[i].genero)
-                }  
+                // for(var i=0;i<resultado.data.docs.length;i++){
+                //     this.generoItems.push(resultado.data.docs[i].genero)
+                // }
+                
+                this.generoItems = resultado.data.docs
+                
             }).catch(error => console.log(error))
     }
     

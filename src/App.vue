@@ -11,14 +11,14 @@
         href="/login"
         target=""
       >
-        <span class="mr-2">Filme</span>        
+        <span class="mr-2">Login</span>        
       </v-btn> 
       <v-btn
         flat
-        href="/cadastro/filme"
+        href="/listagem/filmes"
         target=""
       >
-        <span class="mr-2">Cadastro Filme</span>        
+        <span class="mr-2">Filmes</span>        
       </v-btn> 
       
       <v-btn
@@ -39,14 +39,15 @@
 <script>
 import HelloWorld from './components/HelloWorld'
 import Login from './components/Login'
-import Filme from './components/cadastro/CadastroFilme'
-
+import CadastroFilme from './components/cadastro/CadastroFilme'
+import ListarFilmes from './components/listagem/ListarFilmes'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Filme
+    CadastroFilme,
+    ListarFilmes
   },
   data () {
     return {

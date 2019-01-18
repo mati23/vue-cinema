@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Login.vue'
-import Filme from './components/cadastro/CadastroFilme.vue'
-
+import CadastroFilme from './components/cadastro/CadastroFilme.vue'
+import ListarFilmes from './components/listagem/ListarFilmes.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -16,9 +16,14 @@ export default new Router({
       component: Login
     },
     {
+      path: '/listagem/filmes',
+      name: 'listagem_filmes',
+      component: ListarFilmes
+    },
+    {
       path: '/cadastro/filme',
       name: 'cadastro_filme',
-      component: Filme
+      component: CadastroFilme
     },
     {
       path: '/',
