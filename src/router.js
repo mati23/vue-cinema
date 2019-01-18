@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Login.vue'
 import Filme from './components/cadastro/CadastroFilme.vue'
+import Create from './components/cadastroCinema/Create.vue';
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/cadastro/cinema',
+      name: 'cadastro_cinema',
+      component: Create
     },
     {
       path: '/about',
