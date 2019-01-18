@@ -65,9 +65,7 @@ export default {
                 16,
                 18
             ],
-            generoItems: [
-                
-            ]
+            generoItems: []
         }
     },
     methods: {
