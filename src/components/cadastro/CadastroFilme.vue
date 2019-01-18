@@ -8,7 +8,7 @@
   >
     
     <v-text-field
-      v-model="name"
+      v-model="tituloFilme"
       :counter="50"
       
       label="Nome do Filme"
@@ -16,7 +16,7 @@
     ></v-text-field>
 
     <v-select
-      v-model="select"
+      v-model="genero"
       :items="generoItems"
       :rules="[v => !!v || 'Item is required']"
       label="Gênero"
@@ -25,9 +25,9 @@
   
 
     <v-select
-      v-model="select"      
-      :rules="[v => !!v || 'Item is required']"
+      v-model="classificacao"
       :items="classificacaoItems"
+      :rules="[v => !!v || 'Item is required']"
       label="Classificação"
       required
     ></v-select>
@@ -37,7 +37,7 @@
 
     <v-btn
       color="info"
-      
+      @click="criaFilme"
     >
       Cadastrar Filme
     </v-btn>
@@ -53,8 +53,9 @@
 export default {
     data(){
         return {
-            name: '',
-            select: null,
+            tituloFilme: '',
+            genero: '',
+            classificacao: '',
             classificacaoItems:[
                 'L',
                 10,
@@ -66,6 +67,18 @@ export default {
             generoItems: [
                 
             ]
+        }
+    },
+    methods: {
+        criaFilme(){
+            this.$axios.post(
+                'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
+                "collection": "filmes",
+                "titulo": this.tituloFilme,
+                "genero": this.genero,
+                "classificacao": this.classificacao                             
+                }    
+            ).catch(error => console.log(error))
         }
     },
     mounted() {
