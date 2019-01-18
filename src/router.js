@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Login.vue'
+import Createcinema from './components/crudCinema/Createcinema.vue';
+import Createsessao from './components/crudSessao/Createsessao.vue';
+
 import CadastroFilme from './components/cadastro/CadastroFilme.vue'
 import ListarFilmes from './components/listagem/ListarFilmes.vue'
 Vue.use(Router)
@@ -29,6 +32,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/cadastro/cinema',
+      name: 'cadastro_cinema',
+      component: Createcinema
+    },
+    {
+      path: '/cadastro/sessao',
+      name: 'cadastro_sessao',
+      component: Createsessao
     },
     {
       path: '/about',
