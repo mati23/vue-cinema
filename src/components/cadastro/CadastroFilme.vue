@@ -6,6 +6,7 @@
     ref="form"
     
   >
+    
     <v-text-field
       v-model="name"
       :counter="50"
@@ -63,12 +64,26 @@ export default {
                 18
             ],
             generoItems: [
-                'Ação',
-                'Aventura',
-                'Romance'
+                
             ]
         }
     },
+    mounted() {
+        /**
+         * Recebe via requisição POST fazendo a seleção dos itens 'classificação' de cada filme
+         * e em seguida atribui à chave 'generoItems' que será mostrada ao usuario. 
+         */
+        this.$axios.post(
+            'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{selector:{
+                "collection": "filmes"
+            },fields: ["_id", "genero"]
+            }
+            ).then(resultado => {                
+                for(var i=0;i<resultado.data.docs.length;i++){
+                    this.generoItems.push(resultado.data.docs[i].genero)
+                }  
+            }).catch(error => console.log(error))
+    }
     
 }
 </script>
