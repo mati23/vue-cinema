@@ -39,6 +39,7 @@
     <v-btn
       color="info"
       @click="criaFilme"
+      href="/listagem/filmes"
     >
       Cadastrar Filme
     </v-btn>
@@ -80,7 +81,8 @@ export default {
                 "updated_at": "",
                 "deleted_at": ""                             
                 }    
-            ).catch(error => console.log(error))
+            ).catch(error => console.log(error))            
+            
         }
     },
     mounted() {
