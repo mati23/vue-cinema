@@ -37,12 +37,14 @@ export default new Router({
     {
       path: '/listagem/cinemas',
       name: 'listagem_cinemas',
-      component: Readcinema
+      component: Readcinema,
+      props: true
     },
     {
-      path: '/cadastro/cinema',
+      path: '/cadastro/cinema/:id?',
       name: 'cadastro_cinema',
-      component: Createcinema
+      component: Createcinema,
+      props: true
     },
     {
       path: '/cadastro/sessao',

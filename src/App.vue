@@ -19,7 +19,14 @@
         target=""
       >
         <span class="mr-2">Filmes</span>        
-      </v-btn> 
+      </v-btn>
+       <v-btn
+        flat
+        href="/listagem/cinemas"
+        target=""
+      >
+        <span class="mr-2">Cinemas</span>        
+      </v-btn>
       
       <v-btn
         flat
