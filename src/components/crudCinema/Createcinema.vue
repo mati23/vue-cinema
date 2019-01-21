@@ -94,7 +94,8 @@
             "nome": this.cinema.nome,
             "estado": this.cinema.estado,
             "cidade": this.cinema.cidade,
-            "localizacao": this.cinema.localizacao
+            "localizacao": this.cinema.localizacao,
+            "deleted_at": ""
           })
         }else{
           this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
@@ -102,7 +103,8 @@
           "nome": this.cinema.nome,
           "estado": this.cinema.estado,
           "cidade": this.cinema.cidade,
-          "localizacao": this.cinema.localizacao
+          "localizacao": this.cinema.localizacao,
+          "deleted_at": ""
         })
         }
       }

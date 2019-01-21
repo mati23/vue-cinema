@@ -61,6 +61,8 @@
   import Vue from 'vue'
   import Router from '../../router'
 
+  const baseUri = 'http://couch-dev.3e.eng.br:5984/ingresso_online/'
+
   export default {
     data: () => ({
       cinemas: [],
@@ -78,25 +80,64 @@
       ],
     }),
     mounted(){
-        this.$axios.post(
-            'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{selector:{
-                "collection": "cinema"
-            },fields: ["_id","nome", "cidade","localizacao"]
-            }
-            ).then(resultado => {                
-                this.cinemas = resultado.data.docs           
-            }).catch(error => console.log(error))
+      this.listaCinema()
     },
 
     methods: {
+      listaCinema(){
+        this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{selector:{
+          "collection": "cinema",
+          "deleted_at": ""
+        },fields: ["_id","nome", "cidade","localizacao"]
+        }).then(resultado => {                
+          this.cinemas = resultado.data.docs           
+        }).catch(error => console.log(error))
+      },
       editItem (item) {
         this.$router.push({name: 'cadastro_cinema', params: {id: item}})
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
-      },
+        let rev = confirm('Are you sure you want to delete this item?')
+          if(rev){
+            const index = this.cinemas.indexOf(item)
+            /**
+             * Faz uma requisição para selecionar o documento no couch com o ID e REV do item
+             * que foi selecionado
+             */
+            this.$axios.post(
+                'http://couch-dev.3e.eng.br:5984/ingresso_online/_find', {
+                  selector: {
+                    "collection": "cinema",
+                    "_id": item._id
+                    },
+                  
+                },
+                {
+                      withCredentials: true,
+                      auth:{
+                        username: "admin",
+                        password: "admin2435,"
+                    }
+                }
+            ).then(resultado => {  
+              /**
+               * Edita o resultado da requisição adicionando o campo "deleted_at"
+               * e retorna o documento via requisição PUT */ 
+                  let cinema = resultado.data.docs[0]            
+                  cinema.deleted_at = new Date()
+                  this.$axios.put(baseUri + resultado.data.docs[0]._id, cinema,{
+                      withCredentials: true,
+                      auth:{
+                        username: "admin",
+                        password: "admin2435,"
+                    }
+                  }
+                  ).then(() => this.listaCinema())
+                }
+            ).catch(error => console.log(error))
+          }
+        }
     }
   }
 </script>
