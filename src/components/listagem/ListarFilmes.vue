@@ -111,9 +111,7 @@
       },
 
       editItem (item) {
-        this.$router.push({
-          path: '/cadastro/filme'
-        })
+        this.$router.push({name: 'cadastro_filme', params: {id: item._id}})
       },
 
       deleteItem (item) {

@@ -94,7 +94,7 @@
         }).catch(error => console.log(error))
       },
       editItem (item) {
-        this.$router.push({name: 'cadastro_cinema', params: {id: item}})
+        this.$router.push({name: 'cadastro_filme', params: {id: item}})
       },
 
       deleteItem (item) {

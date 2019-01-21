@@ -23,12 +23,15 @@ export default new Router({
     {
       path: '/listagem/filmes',
       name: 'listagem_filmes',
-      component: ListarFilmes
+      component: ListarFilmes,
+      props: true
     },
     {
-      path: '/cadastro/filme',
+      path: '/cadastro/filme/:id?',
       name: 'cadastro_filme',
-      component: CadastroFilme
+      component: CadastroFilme,
+      props: true
+
     },
     {
       path: '/',
