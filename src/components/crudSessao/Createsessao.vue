@@ -1,31 +1,31 @@
 <template>
   <form>
     <v-select
-      v-model="sessaoCinema"
+      v-model="sessao.cinema"
       :items="cinemalist"
       :item-text="'nome'"
       label="Cinema"
       required
     ></v-select>
     <v-select
-      v-model="sessaoFilme"
+      v-model="sessao.filme"
       :items="filmelist"
       :item-text="'titulo'"
       label="Filme"
       required
     ></v-select>
     <v-text-field
-      v-model="sessaoData"
+      v-model="sessao.data"
       label="Data"
       required
     ></v-text-field>
     <v-text-field
-      v-model="sessaoHora"
+      v-model="sessao.hora"
       label="Horario"
       required
     ></v-text-field>
     <v-text-field
-      v-model="preco"
+      v-model="sessao.preco"
       label="Preço"
       required
     ></v-text-field>
@@ -38,8 +38,17 @@ import axios from 'axios'
 
   export default {
     data: () => ({
-        sessaoCinema:'', sessaoFilme:'', cinemalist:[], filmelist:[],
-        sessaoData:'', sessaoHora:'', preco:''
+      sessao:{
+        _id:'',
+        _rev:'',
+        collection:'',
+        cinema:'',
+        filme:'',
+        data:'',
+        hora:'',
+        preco:''
+      },
+        cinemalist:[], filmelist:[],
     }),
     mounted(){
       this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
@@ -62,15 +71,44 @@ import axios from 'axios'
       })
     },
     methods:{
+
+      // lercadastro(){
+      //   this.$nextTick(()=>{
+      //     axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
+      //       "selector": {
+      //         "nome": this.sessao.cinema
+      //       },fields:["nome"]
+      //     }).then(resultado => { 
+      //       this.sessao.cinema = resultado.data.docs.nome
+      //     }).catch(function (error){
+      //       console.log(error);
+      //     });
+      //   })
+      // },
       salvarcadastro(){
-        this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
+        if(this.$route.params.id){
+          this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
+            "_id": this.sessao._id,
+            "_rev": this.sessao._rev,
+            "collection": this.sessao.collection,
+            "cinema": this.sessao.cinema,
+            "filme": this.sessao.filme,
+            "data": this.sessao.data,
+            "horario": this.sessao.horario,
+            "preco": this.sessao.preco,
+            "deleted_at": ""
+          })
+        }else{
+          this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
           "collection": "sessao",
-          "cinema": this.sessaoCinema,
-          "filme": this.sessaoFilme,
-          "data": this.sessaoData,
-          "horario": this.sessaoHora,
-          "preco": this.preco,
+          "cinema": this.sessao.cinema,
+          "filme": this.sessao.filme,
+          "data": this.sessao.data,
+          "horario": this.sessao.horario,
+          "preco": this.sessao.preco,
+          "deleted_at": ""
         })
+        }
       }
     }
   }

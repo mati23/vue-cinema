@@ -27,7 +27,13 @@
       >
         <span class="mr-2">Cinemas</span>        
       </v-btn>
-      
+      <v-btn
+        flat
+        href="/cadastro/sessao"
+        target=""
+      >
+        <span class="mr-2">Cadastrar Sessão</span>        
+      </v-btn>
       <v-btn
         flat
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
