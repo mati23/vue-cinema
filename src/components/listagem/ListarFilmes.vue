@@ -82,15 +82,7 @@
       
     }),
     mounted(){
-        this.$axios.post(
-            'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{selector:{
-                "collection": "filmes",
-                "deleted_at": ""
-            },fields: ["_id","titulo", "genero","classificacao"]
-            }
-            ).then(resultado => {                
-                this.filmes = resultado.data.docs           
-            }).catch(error => console.log(error))
+        this.listaFilmes()
     },
 
     computed: {
@@ -102,13 +94,30 @@
     },
 
     methods: {
+      /**
+       * Função que faz requisição ao banco de dados e distribui os valores do array de resultados
+       * na tabela
+       */
+      listaFilmes(){
+        this.$axios.post(
+            'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{selector:{
+                "collection": "filmes",
+                "deleted_at": ""
+            },fields: ["_id","titulo", "genero","classificacao"]
+            }
+            ).then(resultado => {                
+                this.filmes = resultado.data.docs           
+            }).catch(error => console.log(error))
+      },
+
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        this.$router.push({
+          path: '/cadastro/filme'
+        })
       },
 
       deleteItem (item) {
+        confirm('Are you sure you want to delete this item?') 
         const index = this.filmes.indexOf(item)
         console.log(item.titulo)
         /**
@@ -119,8 +128,7 @@
             'http://couch-dev.3e.eng.br:5984/ingresso_online/_find', {
               selector: {
                 "collection": "filmes",
-                "_id": item._id,
-                "_rev": item._rev,                 
+                "_id": item._id
                 },
               
             },
@@ -134,23 +142,21 @@
         ).then(resultado => {  
           /**
            * Edita o resultado da requisição adicionando o campo "deleted_at"
-           * e retorna o documento via requisição PUT */              
-              this.filmes = resultado.data.docs
-              this.filmes[0].deleted_at = new Date()
-              console.log(this.filmes[0].deleted_at)
-                           
-              this.$axios.put(baseUri + resultado.data.docs[0]._id, this.filmes[0],{
+           * e retorna o documento via requisição PUT */ 
+              let filme = resultado.data.docs[0]            
+              filme.deleted_at = new Date()
+              this.$axios.put(baseUri + resultado.data.docs[0]._id, filme,{
                   withCredentials: true,
                   auth:{
                     username: "admin",
                     password: "admin2435,"
                 }
               }
-              )
+              ).then(() => this.listaFilmes())
             }
         ).catch(error => console.log(error))
-
-        confirm('Are you sure you want to delete this item?') && this.filmes.splice(index, 1)
+        
+        
       }   
     }
   }
