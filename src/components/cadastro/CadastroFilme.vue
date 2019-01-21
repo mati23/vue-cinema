@@ -39,7 +39,7 @@
     <v-btn
       color="info"
       @click="criaFilme"
-      href="/listagem/filmes"
+      target=""
     >
       Cadastrar Filme
     </v-btn>
