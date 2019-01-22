@@ -54,7 +54,12 @@ export default new Router({
       props: true
     },
     {
-      path: '/listagem/sessao',
+      path: '/listagem/sessao/:cinema?',
+      name: 'listagem_sessao',
+      component: Readsessao
+    },
+    {
+      path: '/listagem/sessao/:filme?',
       name: 'listagem_sessao',
       component: Readsessao
     },

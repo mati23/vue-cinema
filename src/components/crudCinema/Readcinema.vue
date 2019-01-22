@@ -33,6 +33,15 @@
         <td class="text-xs-right">{{ props.item.cidade }}</td>
         <td class="text-xs-right">{{ props.item.localizacao }}</td>
         <td class="justify-center layout px-0">
+          <v-btn 
+            slot="activator" 
+            color="primary" 
+            dark 
+            class="mb-2"
+            @click="listItem(props.item.nome)"
+            target="">
+            Lista de Filmes
+          </v-btn>
           <v-icon
             small
             class="mr-2"
@@ -89,14 +98,17 @@
           "collection": "cinema",
           "deleted_at": ""
         },fields: ["_id","nome", "cidade","localizacao"]
-        }).then(resultado => {                
-          this.cinemas = resultado.data.docs           
+        }).then(resultado => {
+          this.cinemas = resultado.data.docs
         }).catch(error => console.log(error))
       },
+
       editItem (item) {
         this.$router.push({name: 'cadastro_cinema', params: {id: item}})
       },
-
+      listItem (item) {
+        this.$router.push({name: 'listagem_sessao', params: {cinema: item}})
+      },
       deleteItem (item) {
         let rev = confirm('Are you sure you want to delete this item?')
           if(rev){

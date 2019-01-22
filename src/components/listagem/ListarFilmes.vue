@@ -20,10 +20,6 @@
           <v-card-title>
             <span class="headline"></span>
           </v-card-title>
-
-          
-
-          
         </v-card>
       </v-dialog>
     </v-toolbar>
@@ -37,6 +33,15 @@
         <td class="text-xs-right">{{ props.item.genero }}</td>
         <td class="text-xs-right">{{ props.item.classificacao }}</td>
         <td class="justify-center layout px-0">
+          <v-btn 
+            slot="activator" 
+            color="primary" 
+            dark 
+            class="mb-2"
+            @click="listItem(props.item.titulo)"
+            target="">
+            Lista de Cinemas
+          </v-btn>
           <v-icon
             small
             class="mr-2"
@@ -59,7 +64,6 @@
   </div>
 </template>
 
-
 <script>
   const baseUri = 'http://couch-dev.3e.eng.br:5984/ingresso_online/'
   export default {
@@ -73,13 +77,9 @@
           sortable: false,
           value: 'name'
         },
-        { text: 'Gênero', value: 'calories' },
-        { text: 'Classificação', value: 'fat' },        
-        { text: 'Actions', value: 'name', sortable: false }
+        { text: 'Gênero', value: '' },
+        { text: 'Classificação', value: '' },
       ],
-      
-      
-      
     }),
     mounted(){
         this.listaFilmes()
@@ -109,13 +109,14 @@
                 this.filmes = resultado.data.docs           
             }).catch(error => console.log(error))
       },
-
       editItem (item) {
         this.$router.push({
           path: '/cadastro/filme'
         })
       },
-
+      listItem (item) {
+        this.$router.push({name: 'listagem_sessao', params: {filme: item}})
+      },
       deleteItem (item) {
         confirm('Are you sure you want to delete this item?') 
         const index = this.filmes.indexOf(item)
@@ -155,8 +156,6 @@
               ).then(() => this.listaFilmes())
             }
         ).catch(error => console.log(error))
-        
-        
       }   
     }
   }
