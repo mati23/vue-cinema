@@ -20,7 +20,7 @@
       required
     ></v-text-field>
     <v-text-field
-      v-model="sessao.hora"
+      v-model="sessao.horario"
       label="Horario"
       required
     ></v-text-field>
@@ -45,12 +45,21 @@ import axios from 'axios'
         cinema:'',
         filme:'',
         data:'',
-        hora:'',
+        horario:'',
         preco:''
       },
         cinemalist:[], filmelist:[],
     }),
     mounted(){
+      if(this.$route.params.id){
+        this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
+          selector:{
+            "_id": this.$route.params.id
+          },
+        }).then(resultado => {                
+          this.sessao = resultado.data.docs[0]
+        }).catch(error => console.log(error))
+      }
       this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
         "selector": {
           "collection": "cinema"
