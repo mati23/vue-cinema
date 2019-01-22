@@ -122,12 +122,8 @@ export default {
                 alert("Usuario registrado!")
             }else{
                 alert("A confirmação de senha está inválida")
-            }
-            
-            
+            }    
         }
-    }
-
-    
+    }    
 }
 </script>
