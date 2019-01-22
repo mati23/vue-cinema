@@ -29,6 +29,16 @@
       label="Preço"
       required
     ></v-text-field>
+    <v-text-field
+      v-model="sessao.lotacao"
+      label="Lotação da sala"
+      required
+    ></v-text-field>
+    <v-text-field
+      v-model="sessao.disponivel"
+      label="Vagas Disponiveis"
+      required
+    ></v-text-field>
     <v-btn @click="salvarcadastro" color="success">Salvar</v-btn>
   </form>
 </template>
@@ -46,7 +56,9 @@ import axios from 'axios'
         filme:'',
         data:'',
         horario:'',
-        preco:''
+        preco:'',
+        lotacao:'',
+        disponivel:''
       },
         cinemalist:[], filmelist:[],
     }),
@@ -80,20 +92,6 @@ import axios from 'axios'
       })
     },
     methods:{
-
-      // lercadastro(){
-      //   this.$nextTick(()=>{
-      //     axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
-      //       "selector": {
-      //         "nome": this.sessao.cinema
-      //       },fields:["nome"]
-      //     }).then(resultado => { 
-      //       this.sessao.cinema = resultado.data.docs.nome
-      //     }).catch(function (error){
-      //       console.log(error);
-      //     });
-      //   })
-      // },
       salvarcadastro(){
         if(this.$route.params.id){
           this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
@@ -105,6 +103,8 @@ import axios from 'axios'
             "data": this.sessao.data,
             "horario": this.sessao.horario,
             "preco": this.sessao.preco,
+            "lotacao": this.sessao.lotacao,
+            "disponivel": this.sessao.disponivel,
             "deleted_at": ""
           })
         }else{
@@ -115,6 +115,8 @@ import axios from 'axios'
           "data": this.sessao.data,
           "horario": this.sessao.horario,
           "preco": this.sessao.preco,
+          "lotacao": this.sessao.lotacao,
+          "disponivel": this.sessao.disponivel,
           "deleted_at": ""
         })
         }

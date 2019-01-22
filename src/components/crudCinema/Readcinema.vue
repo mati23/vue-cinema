@@ -66,10 +66,6 @@
 
 
 <script>
-  import Createcinema from './Createcinema.vue';
-  import Vue from 'vue'
-  import Router from '../../router'
-
   const baseUri = 'http://couch-dev.3e.eng.br:5984/ingresso_online/'
 
   export default {

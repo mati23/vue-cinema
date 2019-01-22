@@ -2,13 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Login.vue'
-import Createcinema from './components/crudCinema/Createcinema.vue';
-import Createsessao from './components/crudSessao/Createsessao.vue';
-import Readcinema from './components/crudCinema/Readcinema.vue';
+import Createcinema from './components/crudCinema/Createcinema.vue'
+import Createsessao from './components/crudSessao/Createsessao.vue'
+import Readcinema from './components/crudCinema/Readcinema.vue'
 import CadastroFilme from './components/cadastro/CadastroFilme.vue'
 import ListarFilmes from './components/listagem/ListarFilmes.vue'
 import CadastroUsuario from './components/cadastro/CadastroUsuario.vue'
 import Readsessao from './components/crudSessao/Readsessao.vue'
+import Createingresso from './components/ingresso/Createingresso.vue'
 
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/listagem/sessao/:filme?',
       name: 'listagem_sessao',
       component: Readsessao
+    },
+    {
+      path: '/ingresso/:id?',
+      name: 'compra_ingresso',
+      component: Createingresso
     },
     {
       path: '/about',

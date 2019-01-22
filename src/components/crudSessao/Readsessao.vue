@@ -29,8 +29,14 @@
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.cinema }}</td>
-        <td class="text-xs-right">{{ props.item.filme }}</td>
+        <v-btn
+          block
+          slot="activator"
+          @click="compraringresso(props.item._id)"
+          target="">
+          <td>{{ props.item.filme }}</td>
+        </v-btn>
+        <td class="text-xs-right">{{ props.item.cinema }}</td>
         <td class="text-xs-right">{{ props.item.data }}</td>
         <td class="text-xs-right">{{ props.item.horario }}</td>
         <td class="text-xs-right">{{ props.item.preco }}</td>
@@ -59,10 +65,6 @@
 
 
 <script>
-  import Createsessao from './Createsessao.vue';
-  import Vue from 'vue'
-  import Router from '../../router'
-
   const baseUri = 'http://couch-dev.3e.eng.br:5984/ingresso_online/'
 
   export default {
@@ -71,12 +73,12 @@
       dialog: false,
       headers: [
         {
-          text: 'Cinema',
+          text: 'Filme',
           align: 'left',
           sortable: false,
           value: ''
         },
-        { text: 'Filme', value: '', sortable: false },
+        { text: 'Cinema', value: '', sortable: false },
         { text: 'Data', value: '', sortable: false },        
         { text: 'Horario', value: '', sortable: false },
         { text: 'Preço', value: '', sortable: false }
@@ -121,7 +123,9 @@
       editItem (item) {
         this.$router.push({name: 'cadastro_sessao', params: {id: item}})
       },
-
+      compraringresso(item){
+        this.$router.push({name: 'compra_ingresso', params: {id: item}})
+      },
       deleteItem (item) {
         let rev = confirm('Are you sure you want to delete this item?')
           if(rev){
