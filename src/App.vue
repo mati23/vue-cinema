@@ -29,10 +29,10 @@
       </v-btn>
       <v-btn
         flat
-        href="/cadastro/sessao"
+        href="/listagem/sessao"
         target=""
       >
-        <span class="mr-2">Cadastrar Sessão</span>        
+        <span class="mr-2">Listar Sessão</span>        
       </v-btn>
       <v-btn
         flat

@@ -7,7 +7,7 @@ import Createsessao from './components/crudSessao/Createsessao.vue';
 import Readcinema from './components/crudCinema/Readcinema.vue';
 import CadastroFilme from './components/cadastro/CadastroFilme.vue'
 import ListarFilmes from './components/listagem/ListarFilmes.vue'
-// import Readsessao from './components/listagem/Readsessao.vue'
+import Readsessao from './components/crudSessao/Readsessao.vue'
 
 Vue.use(Router)
 
@@ -48,15 +48,16 @@ export default new Router({
       props: true
     },
     {
-      path: '/cadastro/sessao',
+      path: '/cadastro/sessao/:id?',
       name: 'cadastro_sessao',
-      component: Createsessao
+      component: Createsessao,
+      props: true
     },
-    // {
-    //   path: '/listagem/sessao',
-    //   name: 'listagem_sessao',
-    //   component: Readsessao
-    // },
+    {
+      path: '/listagem/sessao',
+      name: 'listagem_sessao',
+      component: Readsessao
+    },
     {
       path: '/about',
       name: 'about',
