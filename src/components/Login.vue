@@ -38,7 +38,9 @@
     </div>
 </template>
 <script>
+
 export default {
+    name: 'login',
     data(){
         return{
             email:'',
@@ -50,6 +52,10 @@ export default {
         v => (v && v.length <= 100) || 'nome must be less than 100 characters'
       ],
         }
+    },
+    mounted(){
+        this.mudaTitulo()
+        console.log("um")
     },
     methods: {
         /**
@@ -68,13 +74,20 @@ export default {
             ).then(resultado => {
                 let usuario = resultado.data.docs[0]
                 if(usuario.email == this.email && 
-                   this.$bcryptjs.compareSync(this.password, usuario.hash, function(erro, res){}) == true){
-                       alert("Sejá bem vindo, " + usuario.nome )
+                    this.$bcryptjs.compareSync(this.password, usuario.hash, function(erro, res){}) == true){
+                    alert("Sejá bem vindo, " + usuario.nome )
+                    this.mudaTitulo(usuario.nome)
                 }else{
                     alert("Usuario ou senha estão incorretos!")
                 }
             }).catch(error => console.log(error))
+            
+        },
+        mudaTitulo(nome){
+            window.localStorage.setItem('nomedousuario', nome)
+            console.log(window.localStorage.getItem('nomedousuario'))
         }
+        
     }
 }
 </script>

@@ -2,8 +2,10 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        
+        <span class="font-weight-light">Ingresso Online </span>
+        <span >{{usuario}}</span>
+        
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -44,7 +46,7 @@
     </v-toolbar>
 
     <v-content>
-      <router-view/>
+      <router-view @mudarsessao="atualizaSessao"/>
     </v-content>
   </v-app>
 </template>
@@ -55,17 +57,39 @@ import Login from './components/Login'
 import CadastroFilme from './components/cadastro/CadastroFilme'
 import ListarFilmes from './components/listagem/ListarFilmes'
 
+
+
 export default {
+  
   name: 'App',
   components: {
     HelloWorld,
     CadastroFilme,
-    ListarFilmes
+    ListarFilmes,
+    Login
   },
   data () {
     return {
-      //
+      usuario: "mateus",
     }
+  },
+  mounted(){
+    this.nomeDoUsuario() 
+  },
+  methods:{
+    atualizaSessao(){
+      console.log('atualiza sessao')
+      this.usuario = "TEste" 
+    },
+    nomeDoUsuario(){
+      console.log(window.localStorage.getItem('nomedousuario')) 
+      this.usuario = window.localStorage.getItem('nomedousuario')
+    }
+  },
+  computed:{
+    
   }
+  
 }
 </script>
+ 
