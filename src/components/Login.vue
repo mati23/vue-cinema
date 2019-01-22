@@ -6,8 +6,6 @@
             <h1 class="text-md-center font-weight-light">Pagina de Cadastro</h1>
             <v-form
             ref="form"
-            
-            
         >
             <v-text-field
                 v-model="name"
@@ -25,7 +23,10 @@
             >
             </v-text-field>
             <div class="text-xs-right">
-                <v-btn  >Cancelar</v-btn>
+                <v-btn  
+                color="success"
+                href="/cadastro/usuario"
+                >Registrar-se</v-btn>
                 <v-btn  color="info">Login</v-btn>
             </div>
         </v-form>
