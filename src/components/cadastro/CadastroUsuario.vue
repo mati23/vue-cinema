@@ -101,7 +101,6 @@ export default {
              * e encripta as senhas do usuário para salvar no banco de dados.
              */
             const saltRounds = 10;
-            const senhaEncriptada = this.$bcryptjs.hashSync(this.password, saltRounds)
             var hash = this.$bcryptjs.hashSync(this.password,saltRounds)
             
             if(this.password == this.passwordConfirm){
@@ -113,8 +112,7 @@ export default {
                     "nome": this.nome,
                     "email": this.email,
                     "idade": this.idade,
-                    "password": this.senhaEncriptada,
-                    "passwordEncriptado": '',
+                    "senha": this.$bcryptjs.hashSync(this.password, saltRounds),
                     "hash": hash,
                     "created_at":"",
                     "updated_at":"",
