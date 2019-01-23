@@ -43,6 +43,7 @@ export default {
     name: 'login',
     data(){
         return{
+            id: '',
             email:'',
             password:'',
             nome:'',
@@ -72,6 +73,7 @@ export default {
                 }
             ).then(resultado => {
                 let usuario = resultado.data.docs[0]
+                
                 if(usuario.email == this.email && 
                     this.$bcryptjs.compareSync(this.password, usuario.hash, function(erro, res){}) == true){
                     alert("Sejá bem vindo, " + usuario.nome )

@@ -5,6 +5,7 @@
         
         <span class="font-weight-light">Ingresso Online </span>
         <span >{{usuario}}</span>
+
         
         
       </v-toolbar-title>
@@ -35,16 +36,20 @@
         href="/listagem/sessao"
         target=""
       >
-        <span class="mr-2">Listar Sessão</span>        
+        <span class="mr-2">Listar Sessãos</span>        
       </v-btn>
+      <v-flex xs2 sm2>
+        <v-overflow-btn
+          :items="dropdown_usuario"
+          label= "Minha Conta"
+          target="#dropdown-example"
+        ></v-overflow-btn>
+      </v-flex>
       
     </v-toolbar>
     <v-content>
       <router-view @mudasessao="atualizaSessao($event)"/>
     </v-content>
-    
-
-    
   </v-app>
 </template>
 
@@ -67,7 +72,9 @@ export default {
   },
   data () {
     return {
+      dropdown_usuario: ['Editar Cadastro','Sair'],
       usuario: "",
+      nomeUsuario: this.usuario
     }
   },
   mounted(){
