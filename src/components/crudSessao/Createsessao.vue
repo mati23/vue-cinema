@@ -82,9 +82,9 @@ import axios from 'axios'
         console.log(error);
       }),
       this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
-        "selector": {
+        "selector": { 
           "collection": "filmes"
-        },fields:["_id", "titulo"]
+        },fields:["_id", "titulo"], "limit": 1000
       }).then(resultado => {
         this.filmelist = resultado.data.docs
       }).catch(function (error){

@@ -38,6 +38,13 @@
       >
         <span class="mr-2">Listar Sessãos</span>        
       </v-btn>
+      <v-btn
+        flat
+        href="/meusingressos"
+        target=""
+      >
+        <span class="mr-2">Meus Ingressos</span>        
+      </v-btn>
       <v-flex xs2 sm2>
         <v-overflow-btn
           :items="dropdown_usuario"

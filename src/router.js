@@ -10,6 +10,7 @@ import ListarFilmes from './components/listagem/ListarFilmes.vue'
 import CadastroUsuario from './components/cadastro/CadastroUsuario.vue'
 import Readsessao from './components/crudSessao/Readsessao.vue'
 import Createingresso from './components/ingresso/Createingresso.vue'
+import Readingresso from './components/ingresso/Readingresso.vue'
 
 Vue.use(Router)
 
@@ -78,6 +79,11 @@ export default new Router({
       path: '/ingresso/:id?',
       name: 'compra_ingresso',
       component: Createingresso
+    },
+    {
+      path: '/meusingressos',
+      name: 'carrinho_ingressos',
+      component: Readingresso
     },
     {
       path: '/about',
