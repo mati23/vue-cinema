@@ -97,15 +97,17 @@
             "localizacao": this.cinema.localizacao,
             "deleted_at": ""
           })
+          this.$router.push({ name: 'listagem_cinemas'})
         }else{
           this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
-          "collection": "cinema",
-          "nome": this.cinema.nome,
-          "estado": this.cinema.estado,
-          "cidade": this.cinema.cidade,
-          "localizacao": this.cinema.localizacao,
-          "deleted_at": ""
-        })
+            "collection": "cinema",
+            "nome": this.cinema.nome,
+            "estado": this.cinema.estado,
+            "cidade": this.cinema.cidade,
+            "localizacao": this.cinema.localizacao,
+            "deleted_at": ""
+          })
+          this.$router.push({ name: 'listagem_cinemas'})
         }
       }
     }
