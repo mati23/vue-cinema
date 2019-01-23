@@ -103,7 +103,7 @@ export default {
     }
   },
   mounted(){
-    
+    this.atualizaSessao(localStorage.getItem('nome'))
   },
   methods:{
     atualizaSessao(nomeAtualizado){

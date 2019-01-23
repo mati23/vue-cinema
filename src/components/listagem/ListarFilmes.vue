@@ -82,7 +82,8 @@
       ],
     }),
     mounted(){
-        this.listaFilmes()
+      console.log(localStorage.getItem('nome'))
+      this.listaFilmes()
     },
 
     computed: {
