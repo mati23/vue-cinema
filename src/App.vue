@@ -2,8 +2,11 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        
+        <span class="font-weight-light">Ingresso Online </span>
+        <span >{{usuario}}</span>
+        
+        
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -34,18 +37,12 @@
       >
         <span class="mr-2">Listar Sessão</span>        
       </v-btn>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target=""
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      
     </v-toolbar>
 
-    <v-content>
-      <router-view/>
-    </v-content>
+    
+      <router-view @mudasessao="atualizaSessao($event)"/>
+    
   </v-app>
 </template>
 
@@ -55,17 +52,45 @@ import Login from './components/Login'
 import CadastroFilme from './components/cadastro/CadastroFilme'
 import ListarFilmes from './components/listagem/ListarFilmes'
 
+
+
 export default {
+  
   name: 'App',
   components: {
     HelloWorld,
     CadastroFilme,
-    ListarFilmes
+    ListarFilmes,
+    Login
   },
   data () {
     return {
-      //
+      usuario: "",
     }
+  },
+  mounted(){
+    
+  },
+  methods:{
+    atualizaSessao(nomeAtualizado){
+      console.log('atualiza sessao')
+      this.usuario = nomeAtualizado
+    }
+    
+  },
+  computed:{
+    
+  },
+  watch: {
+    // nomeDoUsuario(){
+    //   console.log(sessionStorage.getItem('nomedousuario') + 'teste2')
+    //   this.usuario = sessionStorage.getItem('nomedousuario')
+    // }
   }
+  
 }
 </script>
+ <style>
+ 
+ </style>
+ 
