@@ -74,7 +74,9 @@
     mounted(){
         this.listaIngresso()
     },
-
+    computed: {
+      
+    },
     methods: {
       listaIngresso(){
         this.$axios.post('http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
