@@ -118,6 +118,8 @@ export default {
           email: localStorage.getItem('email'),
           idade: localStorage.getItem('idade')
         }})
+      }else if(index == 1){
+        localStorage.clear()
       }
       console.log(index)
     }
