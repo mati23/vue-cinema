@@ -38,6 +38,13 @@
       >
         <span class="mr-2">Listar Sessãos</span>        
       </v-btn>
+        <v-btn
+        flat
+        href="/meusingressos"
+        target=""
+      >
+        <span class="mr-2">Meus Ingressos</span>        
+      </v-btn>
 
       <v-menu open-on-hover top offset-y>
       <v-btn
@@ -45,7 +52,7 @@
         color="primary"
         dark
       >
-        Dropdown
+        Minha Conta
       </v-btn>
 
       <v-list>
@@ -58,20 +65,8 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-      <v-btn
-        flat
-        href="/meusingressos"
-        target=""
-      >
-        <span class="mr-2">Meus Ingressos</span>        
-      </v-btn>
-      <v-flex xs2 sm2>
-        <v-overflow-btn
-          :items="dropdown_usuario"
-          label= "Minha Conta"
-          target="#dropdown-example"
-        ></v-overflow-btn>
-      </v-flex>
+    
+      
       
     </v-toolbar>
     <v-content>
