@@ -91,17 +91,18 @@
             criaFilme(){
                 if(this.$route.params.id){
                     this.$axios.post(
-                    'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
-                    "collection": "filmes",
-                    "_id": this.filme._id,
-                    "_rev": this.filme._rev,
-                    "titulo": this.filme.titulo,
-                    "genero": this.filme.genero, 
-                    "classificacao": this.classificacao,
-                    "updated_at": new Date(),
-                    "deleted_at": ""                             
-                    }    
-                ).catch(error => console.log(error))            
+                        'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
+                        "collection": "filmes",
+                        "_id": this.filme._id,
+                        "_rev": this.filme._rev,
+                        "titulo": this.filme.titulo,
+                        "genero": this.filme.genero, 
+                        "classificacao": this.classificacao,
+                        "updated_at": new Date(),
+                        "deleted_at": ""                             
+                        }
+                    ).catch(error => console.log(error))
+                    this.$router.push({ name: 'listagem_filmes'})            
                 }else{
                     this.$axios.post(
                     'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
@@ -114,6 +115,7 @@
                         "deleted_at": ""                       
                     } 
                     ).catch(error => console.log(error))
+                    this.$router.push({ name: 'listagem_filmes'}) 
                 }
                 
             },

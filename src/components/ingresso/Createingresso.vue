@@ -114,6 +114,7 @@
             "cliente": "cliente._id",
             "deleted_at": ""
           })
+          this.$router.push({ name: 'listagem_sessao', params: {cinema: this.sessao.cinema}})
         }else{
           confirm('Acabou os ingressos nessa budega.')
         }
