@@ -39,9 +39,11 @@
       </v-btn>
       
     </v-toolbar>
-
-    
+    <v-content>
       <router-view @mudasessao="atualizaSessao($event)"/>
+    </v-content>
+    
+
     
   </v-app>
 </template>
