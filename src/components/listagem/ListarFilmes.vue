@@ -13,6 +13,7 @@
             slot="activator" 
             color="primary" 
             dark 
+            :disabled="admin == false"
             class="mb-2"
             href="/cadastro/filme"
             target="">Cadastrar</v-btn>
@@ -43,7 +44,9 @@
             Lista de Cinemas
           </v-btn>
           <v-icon
+            id="editButton"
             color="green darken-2"
+            :disabled="admin == false"
             small
             class="mr-2"
             @click="editItem(props.item)"
@@ -52,6 +55,7 @@
           </v-icon>
           <v-icon
             color="red"
+            :disabled="admin == false"
             small
             @click="deleteItem(props.item)"
           >
@@ -70,6 +74,7 @@
   const baseUri = 'http://couch-dev.3e.eng.br:5984/ingresso_online/'
   export default {
     data: () => ({
+      admin: false,
       filmes: [],
       dialog: false,
       headers: [
@@ -111,6 +116,8 @@
                     ).then( resultado => {
                         console.log(resultado.data.docs[0])
                         if(resultado.data.docs[0].admin){
+                            this.admin = true
+                          }else{
                             
                           }
                         }
