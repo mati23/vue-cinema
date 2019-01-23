@@ -85,7 +85,7 @@ export default {
             passwordConfirm: '',
             password: '',          
             nome: '',
-            tipo: 'cliente',
+            admin: '',
             created_at: '',
             updated_at: '',
             deleted_at: '',
@@ -101,6 +101,10 @@ export default {
         this.listaUsuario()
     },
     methods:{
+        /**
+         * Lista as informações do usuario quando ele(a) desejar editar o registro
+         * de cadastro
+         */
         listaUsuario(){
             console.log(this.$route)
             if(this.$route.params.id){
@@ -109,8 +113,7 @@ export default {
                         selector:{
                             "collection": "usuarios",
                             "_id": this.$route.params.id
-                        },
-                                                
+                        },                                                
                         }
                     ).then( resultado => {
                         console.log(resultado.data.docs[0]._id)
@@ -139,6 +142,7 @@ export default {
                         "collection": "usuarios",
                         "_id": this._id,
                         "_rev": this._rev,
+                        "admin": false,
                         "nome": this.nome,
                         "idade":this.idade,
                         "email":this.email,
@@ -157,7 +161,7 @@ export default {
                     this.$axios.post(
                     'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
                         "collection": "usuarios",
-                        "tipo": 'this.tipo',
+                        "admin": false,
                         "nome": this.nome,
                         "email": this.email,
                         "idade": this.idade,

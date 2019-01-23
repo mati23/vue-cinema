@@ -43,6 +43,7 @@
             Lista de Cinemas
           </v-btn>
           <v-icon
+            color="green darken-2"
             small
             class="mr-2"
             @click="editItem(props.item)"
@@ -50,6 +51,7 @@
             edit
           </v-icon>
           <v-icon
+            color="red"
             small
             @click="deleteItem(props.item)"
           >
@@ -84,6 +86,7 @@
     mounted(){
       console.log(localStorage.getItem('nome'))
       this.listaFilmes()
+      this.checaAdmin()
     },
 
     computed: {
@@ -95,6 +98,24 @@
     },
 
     methods: {
+      checaAdmin(){
+            const userId = localStorage.getItem('id')
+            console.log(userId)
+            this.$axios.post(
+                    'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
+                        selector:{
+                            "collection": "usuarios",
+                            "_id": userId
+                        },fields:["_id","nome","admin"]                                                
+                        }
+                    ).then( resultado => {
+                        console.log(resultado.data.docs[0])
+                        if(resultado.data.docs[0].admin){
+                            
+                          }
+                        }
+                    ).catch(error => console.log(error))
+      },
       /**
        * Função que faz requisição ao banco de dados e distribui os valores do array de resultados
        * na tabela
