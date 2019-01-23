@@ -37,6 +37,13 @@
       >
         <span class="mr-2">Listar Sessão</span>        
       </v-btn>
+      <v-btn
+        flat
+        href="/meusingressos"
+        target=""
+      >
+        <span class="mr-2">Meus Ingressos</span>        
+      </v-btn>
       
     </v-toolbar>
     <v-content>
