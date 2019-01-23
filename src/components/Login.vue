@@ -54,8 +54,8 @@ export default {
         }
     },
     mounted(){
-        this.mudaTitulo()
-        console.log("um")
+        //console.log(sessionStorage.getItem('nomedousuario'))
+        
     },
     methods: {
         /**
@@ -63,7 +63,6 @@ export default {
          * à senha do formulário utilizando decriptação e a chave hash do banco
          */
         validaUsuario(){
-            console.log(this.email)
             this.$axios.post(
                 'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
                     selector:{
@@ -76,7 +75,7 @@ export default {
                 if(usuario.email == this.email && 
                     this.$bcryptjs.compareSync(this.password, usuario.hash, function(erro, res){}) == true){
                     alert("Sejá bem vindo, " + usuario.nome )
-                    this.mudaTitulo(usuario.nome)
+                    this.$emit('mudasessao', usuario.nome)
                 }else{
                     alert("Usuario ou senha estão incorretos!")
                 }
@@ -84,9 +83,9 @@ export default {
             
         },
         mudaTitulo(nome){
-            window.localStorage.setItem('nomedousuario', nome)
-            console.log(window.localStorage.getItem('nomedousuario'))
-        }
+            //sessionStorage.setItem('nomedousuario', nome)
+            
+            }
         
     }
 }

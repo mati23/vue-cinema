@@ -6,6 +6,7 @@
         <span class="font-weight-light">Ingresso Online </span>
         <span >{{usuario}}</span>
         
+        
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -45,9 +46,9 @@
       </v-btn>
     </v-toolbar>
 
-    <v-content>
-      <router-view @mudarsessao="atualizaSessao"/>
-    </v-content>
+    
+      <router-view @mudasessao="atualizaSessao($event)"/>
+    
   </v-app>
 </template>
 
@@ -70,24 +71,27 @@ export default {
   },
   data () {
     return {
-      usuario: "mateus",
+      usuario: "",
     }
   },
   mounted(){
-    this.nomeDoUsuario() 
+    
   },
   methods:{
-    atualizaSessao(){
+    atualizaSessao(nomeAtualizado){
       console.log('atualiza sessao')
-      this.usuario = "TEste" 
-    },
-    nomeDoUsuario(){
-      console.log(window.localStorage.getItem('nomedousuario')) 
-      this.usuario = window.localStorage.getItem('nomedousuario')
+      this.usuario = nomeAtualizado
     }
+    
   },
   computed:{
     
+  },
+  watch: {
+    // nomeDoUsuario(){
+    //   console.log(sessionStorage.getItem('nomedousuario') + 'teste2')
+    //   this.usuario = sessionStorage.getItem('nomedousuario')
+    // }
   }
   
 }
