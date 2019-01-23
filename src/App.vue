@@ -37,13 +37,7 @@
       >
         <span class="mr-2">Listar Sessão</span>        
       </v-btn>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target=""
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      
     </v-toolbar>
 
     
@@ -96,4 +90,7 @@ export default {
   
 }
 </script>
+ <style>
+ 
+ </style>
  
