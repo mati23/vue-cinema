@@ -39,7 +39,8 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      props: true
     },
     {
       path: '/listagem/cinemas',
@@ -62,7 +63,8 @@ export default new Router({
     {
       path: '/cadastro/usuario',
       name: 'cadastro_usuario',
-      component: CadastroUsuario
+      component: CadastroUsuario,
+      props: true
     },
  
     {

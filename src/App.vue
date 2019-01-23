@@ -38,6 +38,26 @@
       >
         <span class="mr-2">Listar Sessãos</span>        
       </v-btn>
+
+      <v-menu open-on-hover top offset-y>
+      <v-btn
+        slot="activator"
+        color="primary"
+        dark
+      >
+        Dropdown
+      </v-btn>
+
+      <v-list>
+        <v-list-tile
+          v-for="(item, index) in items"
+          :key="index"
+          @click="acaoUsuario(index)"
+        >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
       <v-btn
         flat
         href="/meusingressos"
@@ -79,7 +99,10 @@ export default {
   },
   data () {
     return {
-      dropdown_usuario: ['Editar Cadastro','Sair'],
+      items: [
+        {title: "Editar Cadastro"},
+        {title: "Sair"}
+        ],
       usuario: "",
       nomeUsuario: this.usuario
     }
@@ -91,13 +114,26 @@ export default {
     atualizaSessao(nomeAtualizado){
       console.log('atualiza sessao')
       this.usuario = nomeAtualizado
+    },
+    acaoUsuario(index){
+      if(index == 0){
+        this.$router.push({name: 'cadastro_usuario', params: {
+          id: localStorage.getItem('id'),
+          nome: localStorage.getItem('nome'),
+          email: localStorage.getItem('email'),
+          idade: localStorage.getItem('idade')
+        }})
+      }
+      console.log(index)
     }
+    
     
   },
   computed:{
     
   },
   watch: {
+    
     // nomeDoUsuario(){
     //   console.log(sessionStorage.getItem('nomedousuario') + 'teste2')
     //   this.usuario = sessionStorage.getItem('nomedousuario')

@@ -75,7 +75,10 @@
 export default {
     
     data(){
+        
         return{
+            _id:'',
+            _rev:'',
             idade: '',
             email:'',
             password:'',
@@ -83,6 +86,9 @@ export default {
             password: '',          
             nome: '',
             tipo: 'cliente',
+            created_at: '',
+            updated_at: '',
+            deleted_at: '',
             show:false,
             
             nomeRules: [
@@ -92,36 +98,80 @@ export default {
         }
     },
     mounted(){
-
+        this.listaUsuario()
     },
     methods:{
-        criaUsuario(){
-            /**
-             * Encripta a senha inserida pelo usuario, checa se as senhas são equivalentes
-             * e encripta as senhas do usuário para salvar no banco de dados.
-             */
-            const saltRounds = 10;
-            var hash = this.$bcryptjs.hashSync(this.password,saltRounds)
-            
-            if(this.password == this.passwordConfirm){
-                //registra usuario
+        listaUsuario(){
+            console.log(this.$route)
+            if(this.$route.params.id){
                 this.$axios.post(
-                'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
-                    "collection": "usuarios",
-                    "tipo": this.tipo,
-                    "nome": this.nome,
-                    "email": this.email,
-                    "idade": this.idade,
-                    "senha": this.$bcryptjs.hashSync(this.password, saltRounds),
-                    "hash": hash,
-                    "created_at":"",
-                    "updated_at":"",
-                    "deleted_at":""
-                    }
-                ).catch(error => console.log(error))
-                alert("Usuario registrado!")
+                    'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/_find',{
+                        selector:{
+                            "collection": "usuarios",
+                            "_id": this.$route.params.id
+                        },
+                                                
+                        }
+                    ).then( resultado => {
+                        console.log(resultado.data.docs[0]._id)
+                        let usuario = resultado.data.docs[0]
+                        this._id = usuario._id
+                        this._rev = usuario._rev
+                        this.nome = usuario.nome
+                        this.email = usuario.email
+                        this.idade = usuario.idade
+                        this.created_at = usuario.created_at
+                        }
+                    ).catch(error => console.log(error))
+            }
+        },
+        criaUsuario(){
+            const saltRounds = 10;
+            var hash = this.$bcryptjs.hashSync(this.password,saltRounds)            
+            console.log(this.$route.params.id)
+            if(this.$route.params.id){
+                /**
+                 * Se for para editar o usuario, recebe as credenciais da sessão 
+                 * e começa o formulário de cadastro com os dados já preenchidos
+                 */
+                this.$axios.post(
+                        'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
+                        "collection": "usuarios",
+                        "_id": this._id,
+                        "_rev": this._rev,
+                        "nome": this.nome,
+                        "idade":this.idade,
+                        "email":this.email,
+                        "senha": this.$bcryptjs.hashSync(this.password, saltRounds),
+                        "hash": hash,
+                        "updated_at": new Date()
+                        }).catch(error => console.log(error))
+                        alert("Usuario atualizado!")                
             }else{
-                alert("A confirmação de senha está inválida")
+                     /**
+                 * Encripta a senha inserida pelo usuario, checa se as senhas são equivalentes
+                 * e encripta as senhas do usuário para salvar no banco de dados.
+                 */
+                if(this.password == this.passwordConfirm){
+                    //registra usuario
+                    this.$axios.post(
+                    'http://admin:admin2435,@couch-dev.3e.eng.br:5984/ingresso_online/',{
+                        "collection": "usuarios",
+                        "tipo": 'this.tipo',
+                        "nome": this.nome,
+                        "email": this.email,
+                        "idade": this.idade,
+                        "senha": this.$bcryptjs.hashSync(this.password, saltRounds),
+                        "hash": hash,
+                        "created_at": new Date(),
+                        "updated_at":"",
+                        "deleted_at":""
+                        }
+                    ).catch(error => console.log(error))
+                    alert("Usuario registrado!")
+                }else{
+                    alert("A confirmação de senha está inválida")
+                }
             }    
         }
     }    
