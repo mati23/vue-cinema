@@ -43,6 +43,7 @@ export default {
     name: 'login',
     data(){
         return{
+            _id:'',
             email:'',
             password:'',
             nome:'',
@@ -68,7 +69,7 @@ export default {
                     selector:{
                         "collection": "usuarios",
                         "email": this.email
-                    },fields: ["_id","email","nome","senha","hash"]
+                    },fields: ["_id","email","nome","senha","hash", "idade"]
                 }
             ).then(resultado => {
                 let usuario = resultado.data.docs[0]
@@ -76,6 +77,10 @@ export default {
                     this.$bcryptjs.compareSync(this.password, usuario.hash, function(erro, res){}) == true){
                     alert("Sejá bem vindo, " + usuario.nome )
                     this.$emit('mudasessao', usuario.nome)
+                    localStorage.setItem('id', usuario._id)
+                    localStorage.setItem('email', usuario.email)
+                    localStorage.setItem('nome', usuario.nome)
+                    localStorage.setItem('idade', usuario.idade)
                 }else{
                     alert("Usuario ou senha estão incorretos!")
                 }

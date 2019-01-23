@@ -111,7 +111,7 @@
             "horario": this.sessao.horario,
             "preco": this.sessao.preco,
             "quantidade": this.quantidade,
-            "cliente": "cliente._id",
+            "cliente": localStorage.getItem('id'),
             "deleted_at": ""
           })
           this.$router.push({ name: 'listagem_sessao', params: {cinema: this.sessao.cinema}})
